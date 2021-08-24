@@ -1,0 +1,34 @@
+html, body {
+	height: 100%;
+}
+header {
+	
+}
+
+header nav {
+	
+}
+.article {
+	padding: 20px;
+}
+.wrapper {
+	min-height: 100%;
+	padding-top: 20px;
+	margin-bottom: 20px;
+}
+.card {
+	margin-bottom: 20px;
+}
+.b {
+	background-color: rgba(0,0,0,.03);
+}
+.card-footer {
+	
+}
+footer {	
+	min-height: 75px;
+	padding: 25px;
+}
+footer a {
+	color: #fff;
+}

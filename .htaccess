@@ -1,0 +1,24 @@
+AddDefaultCharset utf-8
+
+#RewriteEngine on
+
+#RewriteCond %{SCRIPT_FILENAME} !-d
+#RewriteCond %{SCRIPT_FILENAME} !-f
+
+#RewriteRule ^(.*)$ ./index.php?route=$1 [QSA,L]
+
+#<VirtualHost blog.com:80>
+# DocumentRoot C:\xampp\htdocs\blog
+# ServerName blog.com
+# ServerAdmin admin@blog.com
+# <Directory "C:\xampp\htdocs\blog">
+#  Options Indexes FollowSymLinks
+#  Allow from all
+#  Require all granted
+#  IndexIgnore /
+#  RewriteEngine on
+#  RewriteCond %{REQUEST_FILENAME} !-f
+#  RewriteCond %{REQUEST_FILENAME} !-d
+#  RewriteRule ^(.*)$ ./index.php?route=$1 [QSA,L]
+# </Directory>
+#</VirtualHost>
