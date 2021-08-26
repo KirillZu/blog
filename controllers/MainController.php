@@ -22,9 +22,9 @@ class MainController
         
         $articles = $this->db->query($query);
         
-        echo '<pre>';
-        print_r($articles);
-        echo '</pre>';
-//            $this->view->render('main/main.php');
+//        echo '<pre>';
+//        print_r($articles);
+//        echo '</pre>';
+            $this->view->render('main/main.php', ['articles' => $articles]);
     }
 }

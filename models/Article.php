@@ -10,6 +10,7 @@ class Article
     private $id;
     private $authorId;
     private $title;
+    private $contentPreview;
     private $content;
     private $createdAt;
     
@@ -28,4 +29,35 @@ class Article
         
         return $fieldName;
     }
+    
+    public function getId(): int 
+    {
+        return $this->id;
+    }
+
+    public function getAuthorId(): int 
+    {
+        return $this->authorId;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+    
+    public function getContentPreview() {
+        return $this->contentPreview;
+    }
+
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    public function getCreatedAt(): string 
+    {
+        return $this->createdAt;
+    }
+
+
 }
