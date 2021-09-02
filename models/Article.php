@@ -1,39 +1,27 @@
 <?php
 
 namespace models;
-use components\Db;
-use PDO;
+use models\ActiveRecordEntity;
 
 
-class Article 
-{   
-    private $id;
-    private $authorId;
-    private $title;
-    private $contentPreview;
-    private $content;
-    private $createdAt;
-    
-    
-    public function __set($name, $value) {
-        $camelCase = $this->underscoreToCamelCase($name);
-        
-        $this->$camelCase = $value;
-    }
+class Article extends ActiveRecordEntity
+{
+    /** @var int */
+    protected $authorId;
 
-    private function underscoreToCamelCase(string $fieldName): string
-    {
-        preg_match('~^([a-zA-Z]+)\_([a-zA-Z]+)$~', $fieldName, $matches);
-        
-        $fieldName = $matches[1].ucfirst($matches[2]);
-        
-        return $fieldName;
-    }
+    /** @var string */
+    protected $title;
+
+    /** @var string */
+    protected $contentPreview;
+
+    /** @var string */
+    protected $content;
+
+    /** @var string */
+    protected $createdAt;
     
-    public function getId(): int 
-    {
-        return $this->id;
-    }
+    
 
     public function getAuthorId(): int 
     {
@@ -45,7 +33,7 @@ class Article
         return $this->title;
     }
     
-    public function getContentPreview() {
+    public function getContentPreview(): string {
         return $this->contentPreview;
     }
 
@@ -59,5 +47,9 @@ class Article
         return $this->createdAt;
     }
 
+    protected static function getTableName(): string
+    {
+        return 'article';
+    }
 
 }

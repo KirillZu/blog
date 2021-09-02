@@ -6,7 +6,10 @@ use PDO;
 
 class Db 
 {
-    
+    /**
+     * 
+     * @var PDO
+     */
     private $pdo;
 
 
@@ -22,12 +25,17 @@ class Db
     
     }
     
-    public function query(string $query, array $data = []) 
+    public function query(string $query, array $data = [], $className = 'stdClass')
     { 
         
         $result = $this->pdo->prepare($query);
         $result->execute($data);
-        $result->setFetchMode(PDO::FETCH_CLASS, 'Models\Article');
+        $result->setFetchMode(PDO::FETCH_CLASS, $className);
+        
+        if (false === $result) {
+            return null;
+        }
+            
         $article = $result->fetchAll();
         
         return $article;

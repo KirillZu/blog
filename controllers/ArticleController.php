@@ -2,29 +2,36 @@
 
 namespace Controllers;
 use components\Db;
+use models\Article;
 use PDO;
+use views\View;
 
 
 class ArticleController
 {
-   
+    /**@var View */
+    private $view;
+    private $title;
     private $db;
+
 
     public function __construct() 
     {
         $this->db = new Db();
+        $this->view = new View($_SERVER['DOCUMENT_ROOT'].'/templates');
     }
 
     public function actionView(int $articleId)
     {
-        $query = "SELECT * FROM article WHERE id = :articleId";
-        $data = ['articleId' => $articleId];
+        $article = Article::findOne($articleId);
         
-        $article = $this->db->query($query, $data);
-        
-        echo '<pre>';
-        print_r($article);
-        echo '</pre>';
+        if (empty($article)) {
+            $this->view->render('errors/404.php', [], 404);
+            
+            return;
+        }
+  
+        $this->view->render('article/article.php', ['article' => $article, 'title' => $article->getTitle()]);
         
     }
     
@@ -35,7 +42,7 @@ class ArticleController
         
         $data = $this->dummyData();
         
-        $article = $this->db->query($query, $data);
+        // $article = $this->db->query($query, $data);
         
         header('Location: /');
     }
@@ -51,7 +58,7 @@ class ArticleController
                 WHERE id = :articleId";
         $data = ['authorId'=> $authorId, 'title' => $title, 'content' => $content, 'articleId' => $articleId];
         
-        $article = $this->db->query($query, $data);
+        // $article = $this->db->query($query, $data);
         
         header('Location: /article/'.$articleId);
         
@@ -62,7 +69,7 @@ class ArticleController
         $query = "DELETE FROM article WHERE id = :articleId";
         $data = ['articleId' => $articleId];
         
-        $article = $this->db->query($query, $data);
+        // $article = $this->db->query($query, $data);
         
         header('Location: /');
     }
