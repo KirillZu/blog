@@ -18,26 +18,30 @@ abstract class ActiveRecordEntity
 
     public static function findAll()
     {
-        $db = new Db();
+        $db = Db::getInstance();
 
         $query = "SELECT * FROM ".static::getTableName()." ORDER BY created_at DESC";
         
-        $articles = $db->query($query, [], static::class);
+        $result = $db->query($query, [], static::class);
         
-       return $articles;
+       return $result;
     }
 
-    public static function findOne(int $articleId)
+    public static function findOne(int $id)
     {
-        $db = new Db();
+        $db = Db::getInstance();
 
-        $query = "SELECT * FROM ".static::getTableName()." WHERE id = :articleId";
+        $query = "SELECT * FROM ".static::getTableName()." WHERE id = :id";
 
-        $data = ['articleId' => $articleId];
+        $data = ['id' => $id];
         
-        $article = $db->query($query, $data, static::class);
+        $result = $db->query($query, $data, static::class);
         
-       return $article[0];
+        if (empty($result)) {
+            return null;
+        }
+
+        return $result[0];
     }
     
     public function getId(): int 

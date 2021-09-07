@@ -1,7 +1,6 @@
 <?php
 
 namespace Controllers;
-use components\Db;
 use models\Article;
 use views\View;
 
@@ -12,12 +11,10 @@ class MainController
 
     /** @var View */
     private $view;   
-    private $db;
 
 
     public function __construct() {
         $this->view = new View($_SERVER['DOCUMENT_ROOT'].'/templates/');
-        $this->db = new Db();
     }
 
         public function actionIndex()

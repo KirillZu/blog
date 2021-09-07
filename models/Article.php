@@ -2,6 +2,7 @@
 
 namespace models;
 use models\ActiveRecordEntity;
+use models\User;
 
 
 class Article extends ActiveRecordEntity
@@ -23,9 +24,14 @@ class Article extends ActiveRecordEntity
     
     
 
-    public function getAuthorId(): int 
+    public function getAuthorId(): int
     {
         return $this->authorId;
+    }
+
+    public function getAuthor(): User
+    {
+        return User::findOne($this->authorId);
     }
 
     public function getTitle(): string

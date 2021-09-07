@@ -1,9 +1,7 @@
 <?php
 
 namespace Controllers;
-use components\Db;
 use models\Article;
-use PDO;
 use views\View;
 
 
@@ -12,12 +10,10 @@ class ArticleController
     /**@var View */
     private $view;
     private $title;
-    private $db;
 
 
     public function __construct() 
     {
-        $this->db = new Db();
         $this->view = new View($_SERVER['DOCUMENT_ROOT'].'/templates');
     }
 
@@ -25,13 +21,15 @@ class ArticleController
     {
         $article = Article::findOne($articleId);
         
-        if (empty($article)) {
+        if ($article == null) {
             $this->view->render('errors/404.php', [], 404);
             
             return;
         }
+
+        $author = $article->getAuthor()->getNickname();
   
-        $this->view->render('article/article.php', ['article' => $article, 'title' => $article->getTitle()]);
+        $this->view->render('article/article.php', ['article' => $article, 'nickname' => $author, 'title' => $article->getTitle()]);
         
     }
     
